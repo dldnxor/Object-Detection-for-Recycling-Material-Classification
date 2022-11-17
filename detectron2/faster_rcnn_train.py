@@ -13,6 +13,8 @@ from detectron2.data import DatasetCatalog, MetadataCatalog
 from detectron2.data.datasets import register_coco_instances
 from detectron2.evaluation import COCOEvaluator
 from detectron2.data import build_detection_test_loader, build_detection_train_loader
+
+
 # Register Dataset
 try:
     register_coco_instances('coco_trash_train', {}, '../../dataset/train.json', '../../dataset/')
@@ -26,9 +28,13 @@ except AssertionError:
 
 MetadataCatalog.get('coco_trash_train').thing_classes = ["General trash", "Paper", "Paper pack", "Metal", 
                                                          "Glass", "Plastic", "Styrofoam", "Plastic bag", "Battery", "Clothing"]
+
+
 # config 불러오기
 cfg = get_cfg()
 cfg.merge_from_file(model_zoo.get_config_file('COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml'))
+
+
 # config 수정하기
 cfg.DATASETS.TRAIN = ('coco_trash_train',)
 cfg.DATASETS.TEST = ('coco_trash_test',)
@@ -50,6 +56,8 @@ cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 128
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = 10
 
 cfg.TEST.EVAL_PERIOD = 3000
+
+
 # mapper - input data를 어떤 형식으로 return할지 (따라서 augmnentation 등 데이터 전처리 포함 됨)
 import detectron2.data.transforms as T
 
@@ -77,6 +85,8 @@ def MyMapper(dataset_dict):
     dataset_dict['instances'] = utils.filter_empty_instances(instances)
     
     return dataset_dict
+
+
 # trainer - DefaultTrainer를 상속
 class MyTrainer(DefaultTrainer):
     
@@ -93,6 +103,8 @@ class MyTrainer(DefaultTrainer):
             output_folder = './output_eval'
             
         return COCOEvaluator(dataset_name, cfg, False, output_folder)
+
+
 # train
 os.makedirs(cfg.OUTPUT_DIR, exist_ok = True)
 
