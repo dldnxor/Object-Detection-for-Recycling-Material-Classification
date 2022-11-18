@@ -17,11 +17,11 @@ classes = ("General trash", "Paper", "Paper pack", "Metal", "Glass",
            "Plastic", "Styrofoam", "Plastic bag", "Battery", "Clothing")
 
 # config file 들고오기
-cfg = Config.fromfile('./configs/faster_rcnn/faster_rcnn_r50_fpn_1x_coco.py')
+cfg = Config.fromfile('./configs/_trash_/faster_rcnn_r50_fpn.py')
 
 root='../../dataset/'
 
-epoch = 'latest'
+epoch = 'epoch_12'
 
 # dataset config 수정
 cfg.data.test.classes = classes
@@ -34,7 +34,7 @@ cfg.data.samples_per_gpu = 4
 
 cfg.seed=2021
 cfg.gpu_ids = [1]
-cfg.work_dir = './work_dirs/faster_rcnn_r50_fpn_1x_trash'
+cfg.work_dir = './work_dirs/faster_rcnn_r50_fpn'
 
 cfg.model.roi_head.bbox_head.num_classes = 10
 
