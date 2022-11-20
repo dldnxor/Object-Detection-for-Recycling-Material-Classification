@@ -41,51 +41,95 @@ def get_img_infos(dataset):
     return Imgs
 
 
-def make_check_box(tab, labels):
-    for i in range(10):
-        if i in labels:
-            tab.checkbox(classes[i], value=True, disabled=True)
+def create_state(dataset, id):
+    ann_ids = dataset.getAnnIds(imgIds=id)
+    anns = dataset.loadAnns(ann_ids)
+
+    state = {}
+    state['labels'] = np.array([ann['category_id'] for ann in anns])
+    state['boxes_id'] = np.array([ann['id'] for ann in anns])
+    state['boxes'] = np.array([ann['bbox'] for ann in anns]).astype(int)
+    state['viz'] = np.array([True for _ in range(len(state['boxes_id']))])
+    state['label_viz'] = np.array([True for _ in range(len(state['boxes_id']))])
+
+    return state
+
+
+def make_check_box(tab_bbox, labels, viz, label_viz) -> None:
+    label_buttons = {}
+    
+    for label in range(10):
+        if label in labels:
+            if label_viz[label]:
+                label_buttons[label] = tab_bbox.checkbox(classes[label], value=True, key=label)
+            else:
+                label_buttons[label] = tab_bbox.checkbox(classes[label], value=False, key=label)
         else:
-            tab.checkbox(classes[i], value=False, disabled=True)
+            label_buttons[label] = tab_bbox.checkbox(classes[label], value=False, disabled=True, key=label)
+
+    for i, label in enumerate(labels):
+        if label_buttons[label]:
+            viz[i] = True
+            label_viz[i] = True
+        else:
+            viz[i] = False
+            label_viz[i] = False
 
 
-def make_bbox(image, boxes, labels):
+def make_multi_select_box(tab, boxes_id, viz) -> None:
+    selected_id = [id for i, id in enumerate(boxes_id) if viz[i]]
+    selected_boxes = tab.multiselect('Select want box_ids', boxes_id, selected_id)
+    
+    for i, id in enumerate(boxes_id):
+        if id in selected_boxes and viz[i]:
+            viz[i] = True
+        else:
+            viz[i] = False
+
+
+def make_bbox(image, state):
+    boxes, labels = state['boxes'], state['labels']
     boxes[:, 2] = boxes[:, 0] + boxes[:, 2]
     boxes[:, 3] = boxes[:, 1] + boxes[:, 3]
 
-    for box, label in zip(boxes, labels):
-        image = cv2.rectangle(image,
-            (box[0], box[1]), (box[2], box[3]), colors[label], 3
-        )
+    for i, (box, label) in enumerate(zip(boxes, labels)):
+        if state['viz'][i] and state['label_viz'][i]:
+            image = cv2.rectangle(image,
+                (box[0], box[1]), (box[2], box[3]), colors[label], 3
+            )
 
     return image
 
 
-def make_bbox_image(dataset, image, id):
-    ann_ids = dataset.getAnnIds(imgIds=id)
-    anns = dataset.loadAnns(ann_ids)
+def make_bbox_image(dataset, image, id, tab_bbox):
+    tab_bbox_col1, tab_bbox_col2 = tab_bbox.columns(2)
 
-    boxes = np.array([ann['bbox'] for ann in anns]).astype(int)
-    labels = np.array([ann['category_id'] for ann in anns])
+    state = create_state(dataset, id)
 
-    image = make_bbox(image, boxes, labels)
+    make_check_box(tab_bbox_col2, state['labels'], state['viz'], state['label_viz'])
+    make_multi_select_box(tab_bbox, state['boxes_id'], state['viz'])
 
+    image = make_bbox(image, state)
     image = cv2.resize(image, (512, 512))
 
-    return image, labels
+    tab_bbox_col1.image(image, caption='Selected Image')
+
+    return image
 
 
-def make_aug_image(aug_datasets, index):
+def make_aug_image(aug_datasets, tab_augmentation, index, bbox_image) -> None:
+    tab_augmentation_col1, tab_augmentation_col2 = tab_augmentation.columns(2)
+
     aug_image = aug_datasets[index]['img'].data
     aug_image = aug_image.permute(1,2,0)
     aug_image = np.ascontiguousarray(aug_image.data.cpu())
     
-    boxes = aug_datasets[index]['gt_bboxes'].data.numpy().astype(int)
-    labels = aug_datasets[index]['gt_labels'].data.numpy()
+    # boxes = aug_datasets[index]['gt_bboxes'].data.numpy().astype(int)
+    # labels = aug_datasets[index]['gt_labels'].data.numpy()
 
     # aug_image = make_bbox(aug_image, boxes, labels)
-        
-    return aug_image
+    tab_augmentation_col1.image(bbox_image, caption='Original Image')
+    tab_augmentation_col2.image(aug_image, caption="Augmentation Image", clamp=True)
 
 
 def main():
@@ -99,20 +143,13 @@ def main():
     file_name = st.selectbox('Select Image', file_names, index=0)
     index = file_names.index(file_name)
 
+    tab_bbox, tab_augmentation, tab_prediction = st.tabs(["Image", "Augmentation", "Predict"])
+
     file_id = st.session_state.img_infos[index]['id']
     origin_image = cv2.imread(os.path.join(root, file_name))
-    
-    tab_bbox, tab_augmentation, tab_prediction = st.tabs(["Image", "Augmentation", "Predict"])
-    tab_bbox_col1, tab_bbox_col2 = tab_bbox.columns(2)
-    tab_augmentation_col1, tab_augmentation_col2 = tab_augmentation.columns(2)
 
-    bbox_image, labels = make_bbox_image(st.session_state.dataset, origin_image, file_id)
-    tab_bbox_col1.image(bbox_image, caption='Selected Image')
-    make_check_box(tab_bbox_col2, labels)
-
-    aug_image = make_aug_image(st.session_state.aug_dataset, file_id)
-    tab_augmentation_col1.image(bbox_image, caption='Original Image')
-    tab_augmentation_col2.image(aug_image, caption="Augmentation Image", clamp=True)
+    bbox_image = make_bbox_image(st.session_state.dataset, origin_image, file_id, tab_bbox)
+    make_aug_image(st.session_state.aug_dataset, tab_augmentation, file_id, bbox_image)
 
 
 main()
