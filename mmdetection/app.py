@@ -50,7 +50,7 @@ def create_state(dataset, id):
     state['boxes_id'] = np.array([ann['id'] for ann in anns])
     state['boxes'] = np.array([ann['bbox'] for ann in anns]).astype(int)
     state['viz'] = np.array([True for _ in range(len(state['boxes_id']))])
-    state['label_viz'] = np.array([True for _ in range(len(state['boxes_id']))])
+    state['label_viz'] = np.array([True for _ in range(10)])
 
     return state
 
@@ -58,22 +58,23 @@ def create_state(dataset, id):
 def make_check_box(tab_bbox, labels, viz, label_viz) -> None:
     label_buttons = {}
     
+    print(label_viz)
     for label in range(10):
         if label in labels:
             if label_viz[label]:
-                label_buttons[label] = tab_bbox.checkbox(classes[label], value=True, key=label)
+                label_buttons[label] = tab_bbox.checkbox(classes[label], value=True)
             else:
-                label_buttons[label] = tab_bbox.checkbox(classes[label], value=False, key=label)
+                label_buttons[label] = tab_bbox.checkbox(classes[label], value=False)
         else:
-            label_buttons[label] = tab_bbox.checkbox(classes[label], value=False, disabled=True, key=label)
+            label_buttons[label] = tab_bbox.checkbox(classes[label], value=False, disabled=True)
 
     for i, label in enumerate(labels):
         if label_buttons[label]:
             viz[i] = True
-            label_viz[i] = True
+            label_viz[label] = True
         else:
             viz[i] = False
-            label_viz[i] = False
+            label_viz[label] = False
 
 
 def make_multi_select_box(tab, boxes_id, viz) -> None:
