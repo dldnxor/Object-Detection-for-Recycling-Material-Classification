@@ -58,7 +58,6 @@ def create_state(dataset, id):
 def make_check_box(tab_bbox, labels, viz, label_viz) -> None:
     label_buttons = {}
     
-    print(label_viz)
     for label in range(10):
         if label in labels:
             if label_viz[label]:
@@ -144,7 +143,7 @@ def main():
     file_name = st.selectbox('Select Image', file_names, index=0)
     index = file_names.index(file_name)
 
-    tab_bbox, tab_augmentation, tab_prediction = st.tabs(["Image", "Augmentation", "Predict"])
+    tab_bbox, tab_augmentation, tab_eda, tab_prediction = st.tabs(["Image", "Augmentation", "EDA", "Predict"])
 
     file_id = st.session_state.img_infos[index]['id']
     origin_image = cv2.imread(os.path.join(root, file_name))
