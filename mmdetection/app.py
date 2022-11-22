@@ -63,30 +63,24 @@ def create_state(dataset, id):
     state['boxes_id'] = np.array([ann['id'] for ann in anns])
     state['boxes'] = np.array([ann['bbox'] for ann in anns]).astype(int)
     state['viz'] = np.array([True for _ in range(len(state['boxes_id']))])
-    state['label_viz'] = np.array([True for _ in range(10)])
 
     return state
 
 
-def make_check_box(tab_bbox, labels, viz, label_viz) -> None:
+def make_check_box(tab_bbox, labels, viz) -> None:
     label_buttons = {}
     
     for label in range(10):
         if label in labels:
-            if label_viz[label]:
-                label_buttons[label] = tab_bbox.checkbox(classes[label], value=True)
-            else:
-                label_buttons[label] = tab_bbox.checkbox(classes[label], value=False)
+            label_buttons[label] = tab_bbox.checkbox(classes[label], value=True)
         else:
             label_buttons[label] = tab_bbox.checkbox(classes[label], value=False, disabled=True)
 
     for i, label in enumerate(labels):
         if label_buttons[label]:
             viz[i] = True
-            label_viz[label] = True
         else:
             viz[i] = False
-            label_viz[label] = False
 
 
 def make_multi_select_box(tab, boxes_id, viz) -> None:
@@ -106,7 +100,7 @@ def make_bbox(image, state):
     boxes[:, 3] = boxes[:, 1] + boxes[:, 3]
 
     for i, (box, label) in enumerate(zip(boxes, labels)):
-        if state['viz'][i] and state['label_viz'][i]:
+        if state['viz'][i]:
             image = cv2.rectangle(image,
                 (box[0], box[1]), (box[2], box[3]), colors[label], 3
             )
@@ -119,7 +113,7 @@ def make_bbox_image(dataset, origin_image, id, tab_bbox):
 
     state = create_state(dataset, id)
 
-    make_check_box(tab_bbox_col2, state['labels'], state['viz'], state['label_viz'])
+    make_check_box(tab_bbox_col2, state['labels'], state['viz'])
     make_multi_select_box(tab_bbox, state['boxes_id'], state['viz'])
 
     image = copy.deepcopy(origin_image)
@@ -148,9 +142,10 @@ def make_pred_image(model, tab_predict, origin_image, bbox_image) -> None:
     output = inference_detector(model, origin_image)
     # predict_image = show_result_pyplot(model, origin_image, output, score_thr=0.5)
     predict_image = model.show_result(origin_image, output)
+    predict_image =cv2.resize(predict_image, (512, 512))
 
     tab_predict_col1.image(bbox_image, caption='GT_Bboxes')
-    tab_predict_col2.image(predict_image)
+    tab_predict_col2.image(predict_image, caption='Predict_Bboxes')
 
 
 def main():
