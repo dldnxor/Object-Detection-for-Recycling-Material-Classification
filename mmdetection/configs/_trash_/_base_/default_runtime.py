@@ -4,16 +4,16 @@ log_config = dict(
     interval=500,
     hooks=[
         dict(type='TextLoggerHook', interval=500),
-        dict(type='WandbLoggerHook',
+        dict(type='MMDetWandbHook',
             init_kwargs={
                 'project':'trash_object_detection',
                 'entity':'cv_09_detection',
                 "name":'faster_rcnn_r50_fpn',
             },
             interval=1000,
-            # log_checkpoint=True,
-            # log_checkpoint_metadata=True,
-            # num_eval_images=10,
+            log_checkpoint=True,
+            log_checkpoint_metadata=True,
+            num_eval_images=0,
         )
         # dict(type='TensorboardLoggerHook')
     ])
@@ -24,7 +24,7 @@ dist_params = dict(backend='nccl')
 log_level = 'INFO'
 load_from = None
 resume_from = None
-workflow = [('train', 1)]
+workflow = [('train', 1), ('val', 1)]
 
 # disable opencv multithreading to avoid system being overloaded
 opencv_num_threads = 0
