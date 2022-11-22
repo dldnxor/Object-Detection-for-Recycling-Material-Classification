@@ -11,9 +11,9 @@ log_config = dict(
                 "name":'faster_rcnn_r50_fpn',
             },
             interval=1000,
-            log_checkpoint=True,
+            log_checkpoint=False,
             log_checkpoint_metadata=True,
-            num_eval_images=0,
+            num_eval_images=100,
         )
         # dict(type='TensorboardLoggerHook')
     ])
