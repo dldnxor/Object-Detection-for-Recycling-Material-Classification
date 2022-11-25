@@ -23,7 +23,7 @@ colors = [(102, 147, 171), (247, 215, 105), (37, 94, 150),
  (241, 103, 66), (162, 217, 227), (241, 211, 203),
  (159, 186, 121), (213, 69, 132), (109, 127, 91), (214, 183, 159)]
 
-cfg_path = './configs/_trash_/faster_rcnn_r50_fpn.py'
+cfg_path = './configs/_trash_/faster_rcnn_r50_fpn_2x_1024.py'
 cfg = Config.fromfile(cfg_path)
 
 
@@ -38,9 +38,9 @@ def load_data():
 
 # @st.cache(hash_funcs=MyModelClass: lambda model: model.get_config()})
 def load_model():
-    epoch = 'epoch_12'
+    epoch = 'epoch_24'
 
-    work_dir = './work_dirs/faster_rcnn_r50_fpn'
+    work_dir = './work_dirs/faster_rcnn_r50_fpn_2x_1024'
     checkpoint_path = os.path.join(work_dir, f'{epoch}.pth')
 
     model = model = init_detector(cfg_path, checkpoint_path) # build detector

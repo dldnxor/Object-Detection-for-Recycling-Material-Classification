@@ -17,26 +17,26 @@ classes = ("General trash", "Paper", "Paper pack", "Metal", "Glass",
            "Plastic", "Styrofoam", "Plastic bag", "Battery", "Clothing")
 
 # config file 들고오기
-cfg = Config.fromfile('./configs/_trash_/faster_rcnn_r50_fpn.py')
+cfg = Config.fromfile('./configs/_trash_/faster_rcnn_r50_fpn_2x_1024.py')
 
 root='../../dataset/'
 
-epoch = 'epoch_12'
+epoch = 'epoch_24'
 
 # dataset config 수정
 cfg.data.test.classes = classes
 cfg.data.test.img_prefix = root
 cfg.data.test.ann_file = root + 'test.json'
-cfg.data.test.pipeline[1]['img_scale'] = (512,512) # Resize
+cfg.data.test.pipeline[1]['img_scale'] = (1024,1024) # Resize
 cfg.data.test.test_mode = True
 
 cfg.data.samples_per_gpu = 4
 
 cfg.seed=2021
 cfg.gpu_ids = [1]
-cfg.work_dir = './work_dirs/faster_rcnn_r50_fpn'
+cfg.work_dir = './work_dirs/faster_rcnn_r50_fpn_2x_1024'
 
-cfg.model.roi_head.bbox_head.num_classes = 10
+# cfg.model.roi_head.bbox_head.num_classes = 10
 
 cfg.optimizer_config.grad_clip = dict(max_norm=35, norm_type=2)
 cfg.model.train_cfg = None
