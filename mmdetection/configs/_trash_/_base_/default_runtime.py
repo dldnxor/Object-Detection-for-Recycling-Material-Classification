@@ -9,7 +9,7 @@ log_config = dict(
             init_kwargs={
                 "project": "trash_object_detection",
                 "entity": "cv_09_detection",
-                "name": "faster_rcnn_r50_fpn_swin-t",
+                "name": "cascade_swint_RBC_SCR_Mosaic",
             },
             interval=1000,
             log_checkpoint=False,
@@ -26,7 +26,7 @@ dist_params = dict(backend="nccl")
 log_level = "INFO"
 load_from = None
 resume_from = None
-workflow = [("train", 1), ("val", 1)]
+workflow = [("train", 1)]
 
 # disable opencv multithreading to avoid system being overloaded
 opencv_num_threads = 0
