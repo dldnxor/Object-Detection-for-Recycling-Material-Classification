@@ -3,14 +3,14 @@ model = dict(
     type="FasterRCNN",
     backbone=dict(
         type="ResNet",
-        depth=50,
+        depth=101,
         num_stages=4,
         out_indices=(0, 1, 2, 3),
         frozen_stages=1,
         norm_cfg=dict(type="BN", requires_grad=True),
         norm_eval=True,
         style="pytorch",
-        init_cfg=dict(type="Pretrained", checkpoint="torchvision://resnet50"),
+        init_cfg=dict(type="Pretrained", checkpoint="torchvision://resnet101"),
     ),
     neck=dict(type="FPN", in_channels=[256, 512, 1024, 2048], out_channels=256, num_outs=5),
     rpn_head=dict(
@@ -103,8 +103,8 @@ model = dict(
         ),
         rcnn=dict(
             score_thr=0.05,
-            # nms=dict(type='nms', iou_threshold=0.5),
-            nms=dict(type="soft_nms", iou_threshold=0.5, min_score=0.4),
+            nms=dict(type="nms", iou_threshold=0.5),
+            # nms=dict(type="soft_nms", iou_threshold=0.5, min_score=0.4),
             max_per_img=100,
         )
         # soft-nms is also supported for rcnn testing
