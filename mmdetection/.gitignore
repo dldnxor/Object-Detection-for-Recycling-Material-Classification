@@ -124,5 +124,4 @@ work_dirs/
 *.sh~
 
 wandb/
-
 artifacts/
