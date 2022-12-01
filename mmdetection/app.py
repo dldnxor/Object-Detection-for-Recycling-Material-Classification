@@ -48,7 +48,7 @@ colors = [
     (109, 127, 91),
     (214, 183, 159),
 ]
-model_name = "faster_rcnn_swin-t-p4-w7_fpn_1x_coco"
+model_name = "cascade_rcnn_swint_fpn_1x_coco"
 cfg_path = "./configs/_trash_/" + model_name + ".py"
 cfg = Config.fromfile(cfg_path)
 
