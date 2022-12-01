@@ -412,6 +412,7 @@ class MMDetWandbHook(WandbLoggerHook):
 
             # Get segmentation mask if available.
             segms = None
+            segm_result = None
             if segm_result is not None and len(labels) > 0:
                 segms = mmcv.concat_list(segm_result)
                 segms = mask_util.decode(segms)
