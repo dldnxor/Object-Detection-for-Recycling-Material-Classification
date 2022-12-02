@@ -4,16 +4,27 @@
 ## 🔥Member
 | [정승윤](https://github.com/syoon6682) | [김주희](https://github.com/alias26) | [신현수](https://github.com/Hyun-soo-Shin) | [이우택](https://github.com/dldnxor) | [이해욱](https://github.com/woooo-k) |
 | :-: | :-: | :-: | :-: | :-: |
-| <img src="https://avatars.githubusercontent.com/syoon6682" width="100"> | <img src="https://avatars.githubusercontent.com/alias26" width="100"> | <img src="https://avatars.githubusercontent.com/Hyun-soo-Shin" width="100"> | <img src="https://avatars.githubusercontent.com/OZOOOOOH" width="100"> | <img src="https://avatars.githubusercontent.com/woooo-k" width="100"> |
+| <img src="https://avatars.githubusercontent.com/syoon6682" width="100"> | <img src="https://avatars.githubusercontent.com/alias26" width="100"> | <img src="https://avatars.githubusercontent.com/Hyun-soo-Shin" width="100"> | <img src="https://avatars.githubusercontent.com/dldnxor" width="100"> | <img src="https://avatars.githubusercontent.com/woooo-k" width="100"> |
 ***
 ## Index
-* [Project Summary](#project-summary)
-* [Team Roles](#team-roles)
-* [Procedures](#procedures)
-* [Features](#features)
-* [Result](#result)
-* [Requirements](#requirements)
-* [Conclusion](#Conclusion)  
+- [🏆재활용 품목 분류를 위한 Object Detection🏆](#재활용-품목-분류를-위한-object-detection)
+  - [🔥Member](#member)
+  - [Index](#index)
+  - [🏅Project Summary](#project-summary)
+  - [👨‍👩‍👧‍👧Team Roles](#team-roles)
+  - [🗃️Procedures](#️procedures)
+  - [🌿Features](#features)
+  - [📊Result](#result)
+    - [Data Augmentation](#data-augmentation)
+    - [모델 개요](#모델-개요)
+    - [Ensemble](#ensemble)
+      - [NMS](#nms)
+      - [Weighted Boxes Fusion](#weighted-boxes-fusion)
+    - [시연결과](#시연결과)
+  - [|0.6258|](#06258)
+  - [👨‍💻Conclusion](#conclusion)
+  - [💻Requirements](#requirements)
+  - [🏗️Folder Structure](#️folder-structure)
 ***
 ## 🏅Project Summary
 
@@ -55,7 +66,6 @@
 >- **신현수**: Dataset Split, 2-stage Detector 모델 구현
 ---
 ## 🗃️Procedures
----
 >**[2022.11.14 ~ 2022.11.16]**
 >- Detection 강의 수강 및 프로젝트 기획
 >- 서버 설정 및 개발 환경 setting
@@ -93,6 +103,7 @@
 >**feat-syoon-work**: Resnest, Yolov7x 실험  
 >**feat-universenet**: universenet 실험
 >**feat-valid_setting**: Train Dataset에서 Valid Dataset 분리
+>
 ---
 ## 📊Result
 >### 탐색적 분석(EDA) 및 데이터 전처리
@@ -160,7 +171,7 @@ Cascade, Yolo, UniverseNet 학습에 사용
 **Confusion Matrix**
 |Cascade ResNet152|Cascade ResNest200|Cascade Swin-T|UniverseNet|Yolov7x|
 |----|----|----|----|----|
-|<img src="result/resnet.png" >|<img src="result/resnest.png" >|<img src="result/swin-T.png" >|<<img src="result/universe.png" >|<img src="result/yolox.png" >|
+|<img src="/result/resnet.png" >|<img src="/result/resnest.png" >|<img src="/result/swin-T.png" >|<img src="/result/universe.png" >|<img src="/result/yolox.png" >|
 
 **Metric : mAP50**
 |Cascade ResNet152|Cascade ResNest200|Cascade Swin-T|UniverseNet|Yolov7x|
@@ -189,14 +200,16 @@ Wandb, Data Viz 등을 통해 모델의 학습 그래프의 시각화 및 로깅
 
 ---
 ## 💻Requirements
->conda install pytorch=1.7.1 cudatoolkit=11.0 torchvision -c pytorch  
->pip install openmim  
->mim install mmdet  
+```
+conda install pytorch=1.7.1 cudatoolkit=11.0 torchvision -c pytorch  
+pip install openmim  
+mim install mmdet  
+```
 ---
 ## 🏗️Folder Structure
->├── mmdetection  
-│
-├── ResNet152  
+```
+├── mmdetection  
+│     ├── ResNet152  
 │     ├── ResNest200  
 │     └── SwinT    
 │  
@@ -207,8 +220,8 @@ Wandb, Data Viz 등을 통해 모델의 학습 그래프의 시각화 및 로깅
 │     └── YOLOv7x  
 │   
 └── dataset  
-      ├── train.json  
-      ├── train_split.json  
-      └── valid_split.json  
-
+│     ├── train.json  
+│     ├── train_split.json  
+│     └── valid_split.json  
+```
 ---
