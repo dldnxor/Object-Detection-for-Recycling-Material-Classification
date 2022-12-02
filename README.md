@@ -7,24 +7,14 @@
 | <img src="https://avatars.githubusercontent.com/syoon6682" width="100"> | <img src="https://avatars.githubusercontent.com/alias26" width="100"> | <img src="https://avatars.githubusercontent.com/Hyun-soo-Shin" width="100"> | <img src="https://avatars.githubusercontent.com/dldnxor" width="100"> | <img src="https://avatars.githubusercontent.com/woooo-k" width="100"> |
 ***
 ## Index
-- [🏆재활용 품목 분류를 위한 Object Detection🏆](#재활용-품목-분류를-위한-object-detection)
-  - [🔥Member](#member)
-  - [Index](#index)
-  - [🏅Project Summary](#project-summary)
-  - [👨‍👩‍👧‍👧Team Roles](#team-roles)
-  - [🗃️Procedures](#️procedures)
-  - [🌿Features](#features)
-  - [📊Result](#result)
-    - [Data Augmentation](#data-augmentation)
-    - [모델 개요](#모델-개요)
-    - [Ensemble](#ensemble)
-      - [NMS](#nms)
-      - [Weighted Boxes Fusion](#weighted-boxes-fusion)
-    - [시연결과](#시연결과)
-  - [|0.6258|](#06258)
-  - [👨‍💻Conclusion](#conclusion)
-  - [💻Requirements](#requirements)
-  - [🏗️Folder Structure](#️folder-structure)
+- [🏅Project Summary](#project-summary)
+- [👨‍👩‍👧‍👧Team Roles](#team-roles)
+- [🗃️Procedures](#️procedures)
+- [🌿Features](#features)
+- [📊Result](#result)
+- [👨‍💻Conclusion](#conclusion)
+- [💻Requirements](#requirements)
+- [🏗️Folder Structure](#️folder-structure)
 ***
 ## 🏅Project Summary
 
