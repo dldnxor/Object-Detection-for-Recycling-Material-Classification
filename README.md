@@ -7,14 +7,24 @@
 | <img src="https://avatars.githubusercontent.com/syoon6682" width="100"> | <img src="https://avatars.githubusercontent.com/alias26" width="100"> | <img src="https://avatars.githubusercontent.com/Hyun-soo-Shin" width="100"> | <img src="https://avatars.githubusercontent.com/dldnxor" width="100"> | <img src="https://avatars.githubusercontent.com/woooo-k" width="100"> |
 ***
 ## Index
-- [🏅Project Summary](#project-summary)
-- [👨‍👩‍👧‍👧Team Roles](#team-roles)
-- [🗃️Procedures](#️procedures)
-- [🌿Features](#features)
-- [📊Result](#result)
-- [👨‍💻Conclusion](#conclusion)
-- [💻Requirements](#requirements)
-- [🏗️Folder Structure](#️folder-structure)
+- [�재활용 품목 분류를 위한 Object Detection🏆](#재활용-품목-분류를-위한-object-detection)
+  - [🔥Member](#member)
+  - [Index](#index)
+  - [🏅Project Summary](#project-summary)
+  - [👨‍👩‍👧‍👧Team Roles](#team-roles)
+  - [🗃️Procedures](#️procedures)
+  - [🌿Features](#features)
+  - [📊Result](#result)
+    - [Data Augmentation](#data-augmentation)
+    - [모델 개요](#모델-개요)
+    - [Ensemble](#ensemble)
+      - [NMS](#nms)
+      - [Weighted Boxes Fusion](#weighted-boxes-fusion)
+    - [시연결과](#시연결과)
+  - [|0.6258|](#06258)
+  - [👨‍💻Conclusion](#conclusion)
+  - [💻Requirements](#requirements)
+  - [🏗️Folder Structure](#️folder-structure)
 ***
 ## 🏅Project Summary
 
@@ -138,9 +148,9 @@
 >
 ---
 ### Data Augmentation
-|Mosiac|RandomCrop|RandomBrightnessContrast|MixUp|Paste In|
+|Mosiac|RandomCrop|ColorTransform|Paste In|
 |----|----|----|----|----|
-|<img src="https://velog.velcdn.com/images/tls991105/post/69127d1a-e433-41c4-ab9f-ad6fa48a19fa/image.png" >|<img src="https://velog.velcdn.com/images/tls991105/post/5d19bc53-e1ba-407f-b5bc-43f81e5bc359/image.png">|<>|<>|<>|
+|<img src="https://velog.velcdn.com/images/tls991105/post/69127d1a-e433-41c4-ab9f-ad6fa48a19fa/image.png" >|<img src="https://velog.velcdn.com/images/tls991105/post/5d19bc53-e1ba-407f-b5bc-43f81e5bc359/image.png">|<img src="./result/colortransform.png">|<img src="./result/paste_in.png">|
 
 ### 모델 개요
 >큰 BackBone 구조의 Object Detection Model들이 학습을 잘하고 데이터가 가지고 있는 문제를 해결하기 어려워 앙상블을 통해 성능 향상을 목표
