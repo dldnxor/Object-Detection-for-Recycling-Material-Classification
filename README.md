@@ -7,7 +7,7 @@
 | <img src="https://avatars.githubusercontent.com/syoon6682" width="100"> | <img src="https://avatars.githubusercontent.com/alias26" width="100"> | <img src="https://avatars.githubusercontent.com/Hyun-soo-Shin" width="100"> | <img src="https://avatars.githubusercontent.com/dldnxor" width="100"> | <img src="https://avatars.githubusercontent.com/woooo-k" width="100"> |
 ***
 ## Index
-- [�재활용 품목 분류를 위한 Object Detection🏆](#재활용-품목-분류를-위한-object-detection)
+- [🏆재활용 품목 분류를 위한 Object Detection🏆](#재활용-품목-분류를-위한-object-detection)
   - [🔥Member](#member)
   - [Index](#index)
   - [🏅Project Summary](#project-summary)
@@ -149,7 +149,7 @@
 ---
 ### Data Augmentation
 |Mosiac|RandomCrop|ColorTransform|Paste In|
-|----|----|----|----|----|
+|----|----|----|----|
 |<img src="https://velog.velcdn.com/images/tls991105/post/69127d1a-e433-41c4-ab9f-ad6fa48a19fa/image.png" >|<img src="https://velog.velcdn.com/images/tls991105/post/5d19bc53-e1ba-407f-b5bc-43f81e5bc359/image.png">|<img src="./result/colortransform.png">|<img src="./result/paste_in.png">|
 
 ### 모델 개요
