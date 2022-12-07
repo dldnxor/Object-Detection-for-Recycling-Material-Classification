@@ -54,7 +54,7 @@ def parse_args():
         default=0,
         help='id of gpu to use '
         '(only applicable to non-distributed training)')
-    parser.add_argument('--seed', type=int, default=None, help='random seed')
+    parser.add_argument('--seed', type=int, default=2021, help='random seed')
     parser.add_argument(
         '--diff-seed',
         action='store_true',
@@ -220,7 +220,7 @@ def main():
         assert 'val' in [mode for (mode, _) in cfg.workflow]
         val_dataset = copy.deepcopy(cfg.data.val)
         val_dataset.pipeline = cfg.data.train.get(
-            'pipeline', cfg.data.train.dataset.get('pipeline'))
+            'pipeline', cfg.data.train.get('pipeline'))
         datasets.append(build_dataset(val_dataset))
     if cfg.checkpoint_config is not None:
         # save mmdet version, config file content and class names in
