@@ -141,7 +141,7 @@
 ### Data Augmentation
 |Mosiac|RandomCrop|ColorTransform|Paste In|
 |----|----|----|----|
-|<img src="https://velog.velcdn.com/images/tls991105/post/69127d1a-e433-41c4-ab9f-ad6fa48a19fa/image.png" >|<img src="https://velog.velcdn.com/images/tls991105/post/5d19bc53-e1ba-407f-b5bc-43f81e5bc359/image.png">|<img src="./result/colortransform.png">|<img src="./result/paste_in.png">|
+|<img src="https://velog.velcdn.com/images/tls991105/post/69127d1a-e433-41c4-ab9f-ad6fa48a19fa/image.png" width="600">|<img src="https://velog.velcdn.com/images/tls991105/post/5d19bc53-e1ba-407f-b5bc-43f81e5bc359/image.png" width="600">|<img src="./result/colortransform.png" width="600">|<img src="./result/paste_in.png" width="600">|
 
 ### 모델 개요
 >큰 BackBone 구조의 Object Detection Model들이 학습을 잘하고 데이터가 가지고 있는 문제를 해결하기 어려워 앙상블을 통해 성능 향상을 목표
@@ -162,7 +162,7 @@ Cascade, Yolo, UniverseNet 학습에 사용
 **Confusion Matrix**
 |Cascade ResNet152|Cascade ResNest200|Cascade Swin-T|UniverseNet|Yolov7x|
 |----|----|----|----|----|
-|<img src="/result/resnet.png" >|<img src="/result/resnest.png" >|<img src="/result/swin-T.png" >|<img src="/result/universe.png" >|<img src="/result/yolox.png" >|
+|<img src="/result/resnet.png" width="600">|<img src="/result/resnest.png" width="600">|<img src="/result/swin-T.png" width="600">|<img src="/result/universe.png" width="600">|<img src="/result/yolox.png" width="600">|
 
 **Metric : mAP50**
 |Cascade ResNet152|Cascade ResNest200|Cascade Swin-T|UniverseNet|Yolov7x|
@@ -178,12 +178,12 @@ Cascade, Yolo, UniverseNet 학습에 사용
 >1. EDA를 통해 데이터 분석를 분석하고 각 모델별 EDA 및 Predict를 실험해 볼 수 있었다.
 >2. 적극적인 팀원들간 소통으로 실험 관리 및 협업 유지를 잘했다.
 >3. MMdetection에만 국한되지 않고 다양한 라이브러리 및 소스로부터 모델을 학습시켜보았다. 
-><br>
+>
 >#### 아쉬운 점들
 >1. Git을 통한 Project ToDo, Issue 관리가 미흡했다.
 >2. 모델 학습하는 과정에서 모델을 빠르게 정하지 못했고 큰 구조의 모델 학습을 빨리 시도해봤어야 했다.
 >3. 전처리를 시도를 많이 못해봐서 아쉽다.
-><br>
+>
 > #### 프로젝트를 통해 배운점
 >1. Data Imbalance, Label 문제 등 데이터의 전처리 및 구조가 중요하다는 점을 깨달았다.
 Wandb, Data Viz 등을 통해 모델의 학습 그래프의 시각화 및 로깅을 통한 실험 관리의 이점을 알 수 있었다.
