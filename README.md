@@ -132,10 +132,11 @@
 >><img src="https://velog.velcdn.com/images/tls991105/post/9ecc379f-bed4-4d7d-b212-ddd1c5891c08/image.png"  width="600"/>![]()
 >>
 >>비율이 1.0~1.5 사이인 것으로 보아 대체로 정사각형에 가깝거나 가로가 약간 긴 모양의 Bounding Box를 가지고 있음.
-><br>
+>
 >#### 데이터 전처리
 >* 모델의 다양한 실험 및 평가를 위해 주어진 Train Dataset을 다시 Train과 Valid Dataset으로 분리해주었음. 분리를 하는 과정에서 class 분포를 균일하게 하기 위해 stratified-split을 사용하였음.
->
+
+
 ---
 ### Data Augmentation
 |Mosiac|RandomCrop|ColorTransform|Paste In|
