@@ -49,7 +49,7 @@
 >
 ---
 ## 👨‍👩‍👧‍👧Team Roles
->- **이우택**: Cascade-RCNN, Swin-L 모델
+>- **이우택**: EDA, Cascade-RCNN, Swin-L 모델
 >- **정승윤**: YOLO 모델 및 ResNest 모델 구현, Git merge 
 >- **김주희**: Streamlit Image Bbox Viz, Predict, UniverseNet, Augmentation, 아이디어 제공
 >- **이해욱**: 팀원들 코드 보면서 따로 공부
